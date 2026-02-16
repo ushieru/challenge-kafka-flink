@@ -107,5 +107,5 @@ curl -X POST http://localhost:8082/transaction \
 ## 📼 Video
 
 <p align="center" width="100%">
-<video src=".github/assets/Grabación de pantalla desde 2026-02-16 08-57-31.mp4" width="80%" controls></video>
+<video src="https://github.com/ushieru/challenge-kafka-flink/raw/refs/heads/main/.github/assets/Grabaci%C3%B3n%20de%20pantalla%20desde%202026-02-16%2008-57-31.mp4" autoplay loop muted width="80%" controls></video>
 </p>
