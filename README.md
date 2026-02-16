@@ -105,7 +105,7 @@ curl -X POST http://localhost:8082/transaction \
 ---
 
 ## 📼 Video
-
+[Link](https://github.com/ushieru/challenge-kafka-flink/raw/refs/heads/main/.github/assets/Grabaci%C3%B3n%20de%20pantalla%20desde%202026-02-16%2008-57-31.mp4)
 <p align="center">
   <video src=".github/assets/Grabación de pantalla desde 2026-02-16 08-57-31.mp4" width="80%" controls muted autoplay loop>
     Tu navegador no soporta el elemento de video.
