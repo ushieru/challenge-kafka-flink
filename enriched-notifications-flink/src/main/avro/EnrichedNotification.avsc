@@ -1,0 +1,14 @@
+{
+  "namespace": "com.notifications.avro",
+  "type": "record",
+  "name": "EnrichedNotification",
+  "fields": [
+    {"name": "transactionId", "type": "string"},
+    {"name": "amount", "type": "double"},
+    {"name": "merchantName", "type": "string"},
+    {"name": "accountNumber", "type": "string"},
+    {"name": "email", "type": "string"},
+    {"name": "phoneNumber", "type": "string"},
+    {"name": "deviceId", "type": "string"}
+  ]
+}

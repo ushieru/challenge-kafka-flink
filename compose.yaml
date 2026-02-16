@@ -1,0 +1,65 @@
+services:
+  zookeeper:
+    image: quay.io/strimzi/kafka:latest-kafka-3.6.1
+    container_name: zookeeper
+    command: [
+      "sh", "-c",
+      "bin/zookeeper-server-start.sh config/zookeeper.properties"
+    ]
+    ports:
+      - "2181:2181"
+    environment:
+      LOG_DIR: /tmp/logs
+
+  kafka:
+    image: quay.io/strimzi/kafka:latest-kafka-3.6.1
+    container_name: kafka
+    environment:
+      LOG_DIR: /tmp/kafka-logs
+    command: [
+      "sh", "-c",
+      "bin/kafka-server-start.sh config/server.properties --override listeners=PLAINTEXT://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092 --override advertised.listeners=PLAINTEXT://kafka:29092,EXTERNAL://localhost:9092 --override listener.security.protocol.map=PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT --override zookeeper.connect=zookeeper:2181 --override auto.create.topics.enable=true"
+    ]
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+
+  apicurio:
+    image: docker.io/apicurio/apicurio-registry-mem:latest-release
+    container_name: apicurio
+    ports:
+      - "8080:8080"
+    environment:
+      QUARKUS_PROFILE: prod
+
+  mongodb:
+    image: docker.io/mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: notification_db
+
+  flink-jobmanager:
+    image: docker.io/flink:1.18.1-java17
+    container_name: flink-jobmanager
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+
+  flink-taskmanager:
+    image: docker.io/flink:1.18.1-java17
+    container_name: flink-taskmanager
+    depends_on:
+      - flink-jobmanager
+    command: taskmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 2

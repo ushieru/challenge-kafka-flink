@@ -1,0 +1,23 @@
+{
+  "namespace": "com.notifications.avro",
+  "type": "record",
+  "name": "Transaction",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "string"
+    },
+    {
+      "name": "amount",
+      "type": "double"
+    },
+    {
+      "name": "merchantName",
+      "type": "string"
+    },
+    {
+      "name": "accountNumber",
+      "type": "string"
+    }
+  ]
+}
